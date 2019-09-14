@@ -15,7 +15,7 @@ conn.once('open', () =>  {
 });
 
 // conectar
-mongoose.connect('mongodb://localhost/nodepop');
+mongoose.connect('mongodb://localhost/nodepop', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // exportar la conexiòn
 module.exports = conn;
