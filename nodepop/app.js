@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Conexión a la base de datos
  */
 require('./lib/connectDB');
+require('./models/Anuncio');
 
 // Variables goblales para vistas
 app.locals.title = 'NodePop';
