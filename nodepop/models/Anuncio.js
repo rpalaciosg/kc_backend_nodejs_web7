@@ -7,9 +7,9 @@ const TAGS_LIST = ['work', 'lifestyle', 'motor', 'mobile'];
 // definimos un esquema anuncio
 const anuncioSchema = mongoose.Schema({
     nombre: String,
-    tipo: String,
+    venta: Boolean,
     precio: Number,
-    foto: {data: Buffer, contetType: String},
+    foto: String,
     tags: [{type: String, enum: TAGS_LIST}]
 });
 
