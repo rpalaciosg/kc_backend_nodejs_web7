@@ -18,8 +18,20 @@
     - Lista de tags existentes
     - Creación de anuncios
 
-## Dependencias
+## Requirements
 
-## Empezar a usar
+### MongoDB
+Para arrancar un servidor local puedes usar:
+```sh
+> ./bin/mongod --dbpath ./data/db --directoryperdb
+```
+
+## API Methods
+
+### Lista de Anuncios
+
+**GET** /anuncios
+Devuelve una lista de anuncios
+[](http://localhost:3000/api/anuncios)
 
 ## Ejemplo de peticiones
