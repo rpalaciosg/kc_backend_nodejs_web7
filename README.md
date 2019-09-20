@@ -1,10 +1,8 @@
 # Nodepop(API)
 
-- Proyecto backend de una API llamada Nodepop como practica, parte del curso de Desarrollo Backend con Node.js del Bootcampo Web 7 de Keepcoding.
-
-- Este proyecto es el backend de un API es creada con EXPRESS, MongoDB y Node.js.
-
+- Proyecto backend de un API llamada Nodepop como practica, parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
 - El servicio mantiene anuncios de compra o venta de artículos y permite buscar como poner filtros por varios criterios.
+- Este proyecto usa EXPRESS, MongoDB, mongoose y Node.js. Se puede ver las dependencias en `package.json`.
 
 - **Anuncios**: cada anuncio tiene los siguientes datos:
     - Nombre del artículo, un anuncio siempre tendrá un solo artículo
@@ -21,10 +19,35 @@
 ## Requirements
 
 ### MongoDB
-Para arrancar un servidor local puedes usar:
-```sh
+Para este proyecto es necesario tener instalado MongoDB. Primero vamos a arrancar un servidor MongoDB local escribiendo la siguiente lìnea en un terminal:
+
+```shell
 > ./bin/mongod --dbpath ./data/db --directoryperdb
 ```
+
+### Instalar dependencias
+Un paso importante antes de arrancar el servidor es instalar todas las dependencias del proyecto. Para hacerlo, en un terminal ejecutamos lo siguiente:
+
+```shell
+> npm install
+```
+### Inicializar Base de Datos
+En este proceso se crearà y cargará una colección de documentos de la base de datos necesaria para el funcionamiento de la aplicación 'nodepop', para esto ejecutamos el script `installDB` dentro del package.json:
+```shell
+> npm run installDB
+```
+### Iniciar App
+Hay varias formas de iniciar o arrancar nodepop:
+- En modo DEBUG para el desarrollo, ejecutamos en un terminal:
+```shell
+> npm run dev
+```
+- En modo Produción, ejecutamos:
+```shell
+> npm run prod
+```
+
+> Puedes conocer mas revisando el apartado `scripts` en el archivo de configuración *package.json*
 
 ## API Methods
 
@@ -35,3 +58,4 @@ Devuelve una lista de anuncios
 [](http://localhost:3000/api/anuncios)
 
 ## Ejemplo de peticiones
+
