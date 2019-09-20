@@ -1,4 +1,5 @@
-[
+{
+    "anuncios": [
     {
         "nombre": "Bicicleta",
         "venta": true,
@@ -55,4 +56,5 @@
         "foto": "mochila.png",
         "tags": ["work", "lifestyle"]
     }
-]
+    ]
+}

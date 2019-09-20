@@ -13,9 +13,20 @@ const data = JSON.parse(fs.readFileSync(file,'utf-8'));
 // conectar
 mongoose.connect('mongodb://localhost/nodepop' , { useNewUrlParser: true, useUnifiedTopology: true });
 
-async function loadAgentes() {    
+
+async function cleanAgentes() {
     try {
-        await Anuncio.insertMany(data);
+        const resDel = await Anuncio.deleteMany({});
+        console.log('Base de datos borrada!', resDel.ok, resDel.deletedCount);        
+    } catch (err) {
+        console.log('Erro al limpiar Anuncios', err);
+        
+    }
+}
+
+async function loadAnuncios() {    
+    try {
+        await Anuncio.insertMany(data.anuncios);
         console.log('Datos de anuncios cargados.!');        
     } catch (err) {
         console.log(`Error al cargar archivo ${file}, >>>>  ${err}`);
@@ -29,14 +40,13 @@ conn.on('error', err => {
     process.exit(1);
 });
 
-// Proceso de Inicializacion
+// Proceso de Inicialización Base de datos una vez conectado a mongodb
 conn.once('open', async () => {
     console.log('Conectado a MongoDB en ', mongoose.connection.name);
     console.log('Limpiando Base de datos..!');
-    const resDel = await Anuncio.deleteMany({});
-    console.log('Base de datos borrada!', resDel.ok, resDel.deletedCount);
+    await cleanAgentes();
     console.log('Cargando anuncios.json!');
-    await loadAgentes();
+    await loadAnuncios();
     console.log('Terminado..!');
     process.exit();
 });
