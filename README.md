@@ -53,9 +53,9 @@ Hay varias formas de iniciar o arrancar nodepop:
 
 ### Lista de Anuncios
 
-**GET** /anuncios
+**GET** /apiv1/anuncios
 Devuelve una lista de anuncios
-[](http://localhost:3000/api/anuncios)
+[](http://localhost:3000/apiv1/anuncios)
 
 ## Ejemplo de peticiones
 

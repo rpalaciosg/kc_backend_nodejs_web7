@@ -8,6 +8,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 app.set('view engine', 'html');
 app.engine('html', require('ejs').__express);
 
@@ -27,7 +28,7 @@ require('./models/Anuncio');
 /**
  * Rutas de mi API
  */
-app.use('/api/anuncios', require('./routes/api/anuncios'));
+app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
 
 // Variables goblales para vistas
 app.locals.title = 'NodePop';

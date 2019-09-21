@@ -3,12 +3,12 @@
 const express = require('express');
 const router = express.Router();
 
-const Anuncio = require('../../models/Anuncio.js');
+const Anuncio = require('../../models/Anuncio');
 
 /**
- * GET /anuncios
+ * GET /apiv1/anuncios
  * Devuelve una lista de anuncios
- * http://localhost:3000/api/anuncios
+ * http://localhost:3000/apiv1/anuncios
  */
 router.get('/', async (req, res, next) => {
     try {
