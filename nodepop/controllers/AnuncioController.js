@@ -4,8 +4,10 @@ let Anuncio = require("../models/Anuncio");
 
 // var anuncioController = {};
 
-function lista() {
-        const query = Anuncio.find({});                        
+function lista({filter, skip, limit}) {
+        const query = Anuncio.find(filter);                        
+        query.skip(skip);
+        query.limit(limit);
         return query.exec();      
 }
 
