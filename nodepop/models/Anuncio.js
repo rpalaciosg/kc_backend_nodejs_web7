@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
-const root = 'http://localhost:3000/images/anuncios/​';
-const TAGS_LIST = ['work', 'lifestyle', 'motor', 'mobile'];
+const mongoose = require("mongoose");
+const root = "http://localhost:3000/images/anuncios/​";
+const TAGS_LIST = ["work", "lifestyle", "motor", "mobile"];
 
 // definimos un esquema anuncio
 const anuncioSchema = mongoose.Schema({
@@ -16,8 +16,12 @@ const anuncioSchema = mongoose.Schema({
     tags: [{type: String, enum: TAGS_LIST}]
 });
 
+anuncioSchema.statics.list = function () {
+    
+};
+
 // definimos modelo, pluralizacion
-const Anuncio = mongoose.model('Anuncio', anuncioSchema);
+const Anuncio = mongoose.model("Anuncio", anuncioSchema);
 
 // exporto modelo
 module.exports = Anuncio;

@@ -7,42 +7,69 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-      <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">
-          <font style="vertical-align: inherit;">
+      <div class=" jumbotron position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 font-weight-normal">
             <font style="vertical-align: inherit;">
-              <%= title %>
+              <font style="vertical-align: inherit;">
+                <%= title %>
+              </font>
             </font>
-          </font>
-        </h1>
-        <p class="lead font-weight-normal">
-          <font style="vertical-align: inherit;">
+          </h1>
+          <p class="lead font-weight-normal">
             <font style="vertical-align: inherit;">
-              Tienes productos que quieres vender?, o buscas productos usados y de buena calidad?
+              <font style="vertical-align: inherit;">
+                Tienes productos que quieres vender?, o buscas productos usados y de buena calidad?
+              </font>
+              <font style="vertical-align: inherit;">
+                  Anuncia tus productos aquí.
+              </font>
             </font>
+          </p>
+          <a class="btn btn-outline-secondary" href="#">
             <font style="vertical-align: inherit;">
-                Anuncia tus productos.
+              <font style="vertical-align: inherit;">Ingresa un Producto</font>
             </font>
-          </font>
-        </p>
-        <a class="btn btn-outline-secondary" href="#">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">Hazlo Aquì</font>
-          </font>
-        </a>
+          </a>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
       </div>
-      <div class="product-device shadow-sm d-none d-md-block"></div>
-      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-    </div>
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="container">
       <h2>Lista de Anuncios</h2>  
-      <%= anuncios.forEach( anuncio => { %>
-        <p><%=anuncio.nombre%></p>
-      <%=})%>
+      <div class="d-flex flex-row flex-wrap">
+        <% anuncios.forEach(anuncio => {%>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100 text-white bg-dark">
+                <a href="#"><img class="card-img-top" src="http://placehold.it/600x300" alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title ">
+                    <a href="#"> <%= anuncio.nombre %> </a>                                         
+                    <%if(anuncio.venta){%>
+                      <span class="badge badge-success" style="font-size: 12px;">Venta</span>                        
+                    <%}%>
+                    <%if(!anuncio.venta){%>                        
+                      <span class="badge badge-warning" style="font-size: 12px;">Compra</span>
+                    <%}%>                             
+                  </h4>
+                  <h5>$<%= anuncio.precio %></h5>
+                  <p class="card-text">
+                    
+                    </p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted"></small>
+                  <% anuncio.tags.forEach(tag => {%>
+                    <a href="#" class="badge badge-pill badge-light"><%=tag%></a>
+                  <%})%>
+                </div>
+              </div>
+          </div>
+
+          <%})%>  
+
+      </div> 
     </div>
-    
-
-
   </body>
 </html>

@@ -1,17 +1,12 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
-const Anuncio = require('../models/Anuncio');
+let Anuncio = require("../models/Anuncio");
 
-var anuncioController = {};
+// var anuncioController = {};
 
-anuncioController.list = async function(req, res){
-    try{
-        await Anuncio.find({}).exec();        
-    } catch(err){
-        console.log('Error', err);
-        return;
-    }
-};
+function lista() {
+        const query = Anuncio.find({});                        
+        return query.exec();      
+}
 
-module.exports = anuncioController;
+module.exports.listaAnuncios = lista;

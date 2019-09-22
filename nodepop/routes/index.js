@@ -2,16 +2,17 @@
 
 const express = require('express');
 const router = express.Router();
-const Anuncio = require('../models/Anuncio');
-
-var anuncio = require('../controllers/AnuncioController');
-
-var anuncio = require('../controllers/AnuncioController');
+const anuncioController = require('../controllers/AnuncioController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {  
-  res.locals = anuncioController.anuncios;
-   res.render('index');
+router.get('/', async function(req, res, next) {  
+  try {
+    res.locals.anuncios = await anuncioController.listaAnuncios();
+    res.render('index'); 
+  } catch (err) {
+    next(err);
+  }
+   
 });
 
 module.exports = router;
