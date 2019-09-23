@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
+const anuncioController = require('../../controllers/AnuncioController');
 const Anuncio = require('../../models/Anuncio');
 
 /**
@@ -12,7 +13,9 @@ const Anuncio = require('../../models/Anuncio');
  */
 router.get('/', async (req, res, next) => {
     try {
-        const anuncios = await Anuncio.find().exec();
+        const skip = parseInt(req.query.skip);
+        const limit = parseInt(req.query.limit);
+        const anuncios = await anuncioController.listaAnuncios({skip, limit});
         res.json({ success: true, anuncios });
     } catch(err) {
         next(err);
