@@ -1,22 +1,10 @@
 # Nodepop(API)
 
-- Proyecto backend de un API llamada Nodepop como practica, parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
-- El servicio mantiene anuncios de compra o venta de artículos y permite buscar como poner filtros por varios criterios.
-- Este proyecto usa EXPRESS, MongoDB, mongoose y Node.js. Se puede ver las dependencias en `package.json`.
-
-- **Anuncios**: cada anuncio tiene los siguientes datos:
-    - Nombre del artículo, un anuncio siempre tendrá un solo artículo
-    - Si el artículo se vende o se busca.
-    - Precio. Será el precio del artículo en caso de ser una oferta de venta. En caso de que sea un adnuncio de 'se busca' será el precio que el solicitante estaría dispuesto a pagar.
-    - *Foto de artículo.* Cada anuncio tendrá solo una foto.
-    - *Tags del anuncio.* Podrá tener uno o varios de estos cuatro: work, lifestyle, motor y mobile.
-
-- **Operaciones que ebe realizar el API:**
-    - Listar anuncios con posibilidad de paginación. Con filtros por tag, tipo de anuncio(venta o búsqueda), rango de precio(precio min. y precio max.) y nombre de artículo(que empiece por el dato buscado)
-    - Lista de tags existentes
-    - Creación de anuncios
+- Proyecto backend del API de la app Nodepop, creada como practica parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
+- El servicio mantiene anuncios de compra o venta de artículos y permite consultar,  y buscar filtros por varios criterios.
 
 ## Requirements
+- **Tecnologías:** Este proyecto usa EXPRESS, MongoDB, mongoose y Node.js. Se puede conocer las dependencias en `package.json`.
 
 ### MongoDB
 Para este proyecto es necesario tener instalado MongoDB. Primero vamos a arrancar un servidor MongoDB local escribiendo la siguiente lìnea en un terminal:
@@ -49,21 +37,63 @@ Hay varias formas de iniciar o arrancar nodepop:
 
 > Puedes conocer mas revisando el apartado `scripts` en el archivo de configuración *package.json*
 
-## API Methods
+# API Methods
 
-### Lista de Anuncios
+- El Api de nodepop esta basada en principios REST y usa los métodos HTTP(GET y POST) para acceder a los recursos. 
+- El formato de trasnferencia soportado por el API para enviar y recibir respuestas es en JSON.
+
+```json
+{
+ success: true,
+ ...
+}
+```
+Además el json a recibir, nos devolverá una propiedad success, la cual estará en `true` cuando la respuesta se ha resuelto satisfactoriamente, y `false` cuando hubo algún error en la petición.
+
+## Endpoint `/anuncios`
+
+El endpoint **/anuncios** en nuestra API nos permitirá  consultar, paginar, y filtrar datos de todos los anuncios registrados en la base de datos MongoDB de nuestra aplicación `Nodepop`.
+
+** Recursos:** 
+Los recursos son todos los métodos, y filtros aplicados o disponibles para un endpoint en este caso el de `/anuncios`.
+
+### [GET] Lista de Anuncios
+
+##### Definición
+http://localhost:3000/apiv1/anuncios
+
+
 
 **GET** /apiv1/anuncios
-Devuelve una lista de anuncios
-[](http://localhost:3000/apiv1/anuncios)
 
-### Lista de Anuncios Paginados
+##### Resultado
+
+```JSON
+
+```
+Recurso del endpoint /anuncios que retonar una lista de todos anuncios.
+
+### [GET] Lista de Anuncios Paginados
+
+##### Definición
+http://localhost:3000/apiv1/anuncios?limit=:limit&skip=:skip
+
+##### Query Params
+- start : **integer** Desde que anuncio se quiere consultar
+- limit : **integer** Cantidad de anuncios a partir del inicio que desea retornar.
 
 **GET** /apiv1/anuncios
 Devuelve un listado de anuncios de acuerdo al parametro limit y skit que se le pase en la URL, en este caso mostrara 2 y saltando 2
-[](http://localhost:3000/apiv1/anuncios?limit=2&skip=2)
 
-### Ejemplo de peticiones
+##### Ejemplo de peticiones
 
-## WebSite Methods
+[http://localhost:3000/apiv1/anuncios?limit=2&skip=2](http://localhost:3000/apiv1/anuncios?limit=2&skip=2)
+
+#### Resultado
+
+```json
+
+```
+
+### 
 
