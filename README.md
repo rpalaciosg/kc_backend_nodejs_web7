@@ -57,5 +57,13 @@ Hay varias formas de iniciar o arrancar nodepop:
 Devuelve una lista de anuncios
 [](http://localhost:3000/apiv1/anuncios)
 
-## Ejemplo de peticiones
+### Lista de Anuncios Paginados
+
+**GET** /apiv1/anuncios
+Devuelve un listado de anuncios de acuerdo al parametro limit y skit que se le pase en la URL, en este caso mostrara 2 y saltando 2
+[](http://localhost:3000/apiv1/anuncios?limit=2&skip=2)
+
+### Ejemplo de peticiones
+
+## WebSite Methods
 
