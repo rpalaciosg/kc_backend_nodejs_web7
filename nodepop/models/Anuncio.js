@@ -1,7 +1,8 @@
 "use strict";
 
 const mongoose = require("mongoose");
-const root = "http://localhost:3000/images/anuncios/​";
+// const root = "http://localhost:3000/images/anuncios/​";
+// const root = "/images/anuncios/​";
 const TAGS_LIST = ["work", "lifestyle", "motor", "mobile"];
 
 // definimos un esquema anuncio
@@ -10,8 +11,8 @@ const anuncioSchema = mongoose.Schema({
     venta: Boolean,
     precio: Number,
     foto: {
-        type: String,
-        get: v => `${root}${v}`
+        type: String
+        // ,get: v => `${root}${v}`
     },
     tags: [{type: String, enum: TAGS_LIST}]
 });

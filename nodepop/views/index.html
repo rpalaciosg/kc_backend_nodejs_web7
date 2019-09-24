@@ -4,7 +4,7 @@
     <title><%= title %></title>
     <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
   </head>
   <body>
       <div class=" jumbotron position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
@@ -39,10 +39,14 @@
       <h2>Lista de Anuncios</h2>  
       <div class="d-flex flex-row flex-wrap">
         <% anuncios.forEach(anuncio => {%>
-
+          
           <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100 text-white bg-dark shadow rounded">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/600x300" alt=""></a>
+              <% 
+                let foto = "/images/anuncios/" + anuncio.foto;                
+                let trim_url = foto.trim();                                         
+               %>
+                <a href="#"><img class="card-img-top" src="<%=trim_url%>" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title ">
                     <a href="#"> <%= anuncio.nombre %> </a>                                         
