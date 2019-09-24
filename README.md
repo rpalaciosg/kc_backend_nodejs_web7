@@ -59,24 +59,79 @@ Los recursos son todos los métodos, y filtros aplicados o disponibles para un e
 
 ### [GET] Lista de Anuncios
 
-##### Definición
+#### Definición
 http://localhost:3000/apiv1/anuncios
 
 
 
 **GET** /apiv1/anuncios
 
-##### Resultado
+#### Resultado
 
 ```JSON
-
+{
+    "success": true,
+    "anuncios": [
+        {
+            "tags": [
+                "lifestyle",
+                "motor"
+            ],
+            "_id": "5d84855afcc9025b29f6d3b8",
+            "nombre": "Bicicleta",
+            "venta": true,
+            "precio": 230.15,
+            "foto": "bici.jpg",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "lifestyle",
+                "mobile"
+            ],
+            "_id": "5d84855afcc9025b29f6d3b9",
+            "nombre": "iPhone 3GS",
+            "venta": false,
+            "precio": 50,
+            "foto": "iphone.png",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "work",
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3ba",
+            "nombre": "Teclado",
+            "venta": true,
+            "precio": 65,
+            "foto": "teclado.png",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "work",
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bb",
+            "nombre": "Mouse",
+            "venta": false,
+            "precio": 29,
+            "foto": "mouse.png",
+            "__v": 0
+        }
+    ]
+}
 ```
-Recurso del endpoint /anuncios que retonar una lista de todos anuncios.
+
+Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 
 ### [GET] Lista de Anuncios Paginados
 
-##### Definición
+#### Definición
 http://localhost:3000/apiv1/anuncios?limit=:limit&skip=:skip
+
+#### Parametros
 
 ##### Query Params
 - start : **integer** Desde que anuncio se quiere consultar
@@ -85,15 +140,72 @@ http://localhost:3000/apiv1/anuncios?limit=:limit&skip=:skip
 **GET** /apiv1/anuncios
 Devuelve un listado de anuncios de acuerdo al parametro limit y skit que se le pase en la URL, en este caso mostrara 2 y saltando 2
 
-##### Ejemplo de peticiones
+#### Ejemplo de peticiones
 
 [http://localhost:3000/apiv1/anuncios?limit=2&skip=2](http://localhost:3000/apiv1/anuncios?limit=2&skip=2)
 
 #### Resultado
 
 ```json
-
+{
+    "success": true,
+    "anuncios": [
+        {
+            "tags": [
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bd",
+            "nombre": "Cubo rubik",
+            "venta": true,
+            "precio": 15,
+            "foto": "cubo_rubik.jpg",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "mobile",
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3be",
+            "nombre": "Smartwatch",
+            "venta": true,
+            "precio": 40,
+            "foto": "smartwatch.png",
+            "__v": 0
+        }
+    ]
+}
 ```
 
-### 
+### [GET] Consultar un Anuncios
 
+#### Definición
+http://localhost:3000/apiv1/anuncios/:id
+
+#### Parametros
+
+##### Path Params
+- id: **integer** Id del anuncio que desea consultar.
+
+#### Ejemplo de peticiones
+[http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba](http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba)
+
+#### Resultado
+
+```json
+{
+    "success": true,
+    "result": {
+        "tags": [
+            "work",
+            "lifestyle"
+        ],
+        "_id": "5d84855afcc9025b29f6d3ba",
+        "nombre": "Teclado",
+        "venta": true,
+        "precio": 65,
+        "foto": "teclado.png",
+        "__v": 0
+    }
+}
+```
