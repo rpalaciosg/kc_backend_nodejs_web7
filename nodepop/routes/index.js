@@ -7,7 +7,7 @@ const anuncioController = require('../controllers/AnuncioController');
 /* GET home page. */
 router.get('/', async function(req, res, next) {  
   try {
-    const skip = parseInt(req.query.skip);
+    const skip = parseInt(req.query.start);
     const limit = parseInt(req.query.limit);
     const venta = req.query.venta;
     const tags = req.query.tag;
