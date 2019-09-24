@@ -11,4 +11,12 @@ function lista({filter, skip, limit}) {
         return query.exec();      
 }
 
+function unAnuncio(id){
+    const query = Anuncio.findById(id);
+    console.log(query.exec());
+    return query.exec();
+
+}
+
 module.exports.listaAnuncios = lista;
+module.exports.consultarUnAnuncio = unAnuncio;
