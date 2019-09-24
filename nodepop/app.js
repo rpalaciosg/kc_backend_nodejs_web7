@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 require('./lib/connectDB');
 require('./models/Anuncio');
+require('./controllers/AnuncioController');
 
 /**
  * Rutas de mi API
