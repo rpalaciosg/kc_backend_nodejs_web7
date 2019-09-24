@@ -66,7 +66,7 @@ http://localhost:3000/apiv1/anuncios
 
 **GET** /apiv1/anuncios
 
-#### Resultado
+#### Resultado del ejemplo
 
 ```JSON
 {
@@ -129,7 +129,7 @@ Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 ### [GET] Lista de Anuncios Paginados
 
 #### Definición
-http://localhost:3000/apiv1/anuncios?limit=:limit&skip=:skip
+http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit
 
 #### Parametros
 
@@ -138,13 +138,13 @@ http://localhost:3000/apiv1/anuncios?limit=:limit&skip=:skip
 - limit : **integer** Cantidad de anuncios a partir del inicio que desea retornar.
 
 **GET** /apiv1/anuncios
-Devuelve un listado de anuncios de acuerdo al parametro limit y skit que se le pase en la URL, en este caso mostrara 2 y saltando 2
+Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le pase en la URL, en este caso mostrara desde el objetos 2 y el lìmite a mostrar es de 2 objetos.
 
 #### Ejemplo de peticiones
 
-[http://localhost:3000/apiv1/anuncios?limit=2&skip=2](http://localhost:3000/apiv1/anuncios?limit=2&skip=2)
+[http://localhost:3000/apiv1/anuncios?start=2&limit=2](http://localhost:3000/apiv1/anuncios?start=2&limit=2)
 
-#### Resultado
+#### Resultado del ejemplo
 
 ```json
 {
@@ -180,17 +180,19 @@ Devuelve un listado de anuncios de acuerdo al parametro limit y skit que se le p
 ### [GET] Consultar un Anuncios
 
 #### Definición
+
 http://localhost:3000/apiv1/anuncios/:id
 
 #### Parametros
 
 ##### Path Params
+
 - id: **integer** Id del anuncio que desea consultar.
 
 #### Ejemplo de peticiones
 [http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba](http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba)
 
-#### Resultado
+#### Resultado del ejemplo
 
 ```json
 {
