@@ -137,7 +137,11 @@ Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 - start : **integer** Desde que anuncio se quiere consultar
 - limit : **integer** Cantidad de anuncios a partir del inicio que desea retornar.
 - fields : **string** Campos que se quiere seleccionar aparezcan en la consulta.
-- sort : **string** Campos por los que se quiere ordenar.
+- sort : **string** Campos por los que se quiere ordenar. Ordena de forma ascendente por defecto.
+  - Descendente: En caso de querer ordenar de forma descendente se agrega el signo menos (-) antes del campo por el que se quiere ordenar como por ejemplo `-precio`.
+- filter : **string** Criterios de búsqueda por campos:
+  - tags = deben estar entre estas opciones [work, lifestyle, motor, mobile]
+  - venta = puede ser [true o false]
 
 **GET** /apiv1/anuncios
 Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le pase en la URL, en este caso mostrara desde el objetos 2 y el lìmite a mostrar es de 2 objetos.
@@ -220,6 +224,55 @@ Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le
     ]
 }
 ```
+
+##### Ejemplo 4: petición filtro por tipo de anuncio
+[http://localhost:3000/apiv1/anuncios?venta=true](http://localhost:3000/apiv1/anuncios?venta=true)
+
+##### Resultado del Ejemplo 4
+```json
+{
+    "success": true,
+    "results": [
+        {
+            "tags": [
+                "lifestyle",
+                "mobile"
+            ],
+            "_id": "5d84855afcc9025b29f6d3b9",
+            "nombre": "iPhone 3GS",
+            "venta": false,
+            "precio": 50,
+            "foto": "iphone.png",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "work",
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bb",
+            "nombre": "Mouse",
+            "venta": false,
+            "precio": 29,
+            "foto": "mouse.png",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "work",
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bf",
+            "nombre": "Mochila",
+            "venta": false,
+            "precio": 40,
+            "foto": "mochila.png",
+            "__v": 0
+        }
+    ]
+}
+```
+
 ### [GET] Consultar un Anuncios
 
 #### Definición

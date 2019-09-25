@@ -17,8 +17,18 @@ router.get('/', async (req, res, next) => {
         const limit = parseInt(req.query.limit);
         const fields = req.query.fields;
         const sort = req.query.sort;
+        const tags = req.query.tags;
+        const venta = req.query.venta;
+        const filter = {};
 
-        const anuncios = await anuncioController.listaAnuncios({skip, limit, fields, sort});
+        if (tags) {
+            filter.tags = tags;
+        }
+
+        if (venta) {
+            filter.venta = venta;
+        }
+        const anuncios = await anuncioController.listaAnuncios({filter:filter, skip, limit, fields, sort});
         res.json({ success: true, results: anuncios });
     } catch(err) {
         next(err);

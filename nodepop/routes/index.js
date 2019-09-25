@@ -9,8 +9,9 @@ router.get('/', async function(req, res, next) {
   try {
     const skip = parseInt(req.query.start);
     const limit = parseInt(req.query.limit);
+    const sort = req.query.sort;
     const venta = req.query.venta;
-    const tags = req.query.tag;
+    const tags = req.query.tags;
     const filter = {};
     if (venta) {
       filter.venta = venta;
@@ -19,7 +20,7 @@ router.get('/', async function(req, res, next) {
       filter.tags = tags;
     }
 
-    res.locals.anuncios = await anuncioController.listaAnuncios({filter, skip, limit});
+    res.locals.anuncios = await anuncioController.listaAnuncios({filter:filter, skip, limit, sort});
     res.render('index'); 
   } catch (err) {
     next(err);
