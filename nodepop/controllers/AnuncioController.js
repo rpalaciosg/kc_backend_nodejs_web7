@@ -4,11 +4,12 @@ let Anuncio = require("../models/Anuncio");
 
 // var anuncioController = {};
 
-function lista({filter, skip, limit, fields}) {
+function lista({filter, skip, limit, fields, sort}) {
         const query = Anuncio.find(filter);                        
         query.skip(skip);
         query.limit(limit);
         query.select(fields);
+        query.sort(sort);
         return query.exec();      
 }
 

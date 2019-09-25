@@ -16,7 +16,9 @@ router.get('/', async (req, res, next) => {
         const skip = parseInt(req.query.start);
         const limit = parseInt(req.query.limit);
         const fields = req.query.fields;
-        const anuncios = await anuncioController.listaAnuncios({skip, limit, fields});
+        const sort = req.query.sort;
+
+        const anuncios = await anuncioController.listaAnuncios({skip, limit, fields, sort});
         res.json({ success: true, results: anuncios });
     } catch(err) {
         next(err);

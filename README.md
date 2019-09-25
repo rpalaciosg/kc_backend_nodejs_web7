@@ -60,7 +60,7 @@ Los recursos son todos los métodos, y filtros aplicados o disponibles para un e
 ### [GET] Lista de Anuncios
 
 #### Definición
-http://localhost:3000/apiv1/anuncios
+`http://localhost:3000/apiv1/anuncios`
 
 
 
@@ -129,14 +129,15 @@ Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 ### [GET] Lista de Anuncios Paginados y con filtros
 
 #### Definición
-http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit&fields=:campo1 :campo2 :campoN
+`http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit&fields=:campo1 :campo2 :campoN&sort=:campo1 :campoN`
 
 #### Parametros
 
 ##### Query Params
 - start : **integer** Desde que anuncio se quiere consultar
 - limit : **integer** Cantidad de anuncios a partir del inicio que desea retornar.
-- fields : **string[]** Campos que se quiere seleccionar aparezcan en la consulta.
+- fields : **string** Campos que se quiere seleccionar aparezcan en la consulta.
+- sort : **string** Campos por los que se quiere ordenar.
 
 **GET** /apiv1/anuncios
 Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le pase en la URL, en este caso mostrara desde el objetos 2 y el lìmite a mostrar es de 2 objetos.
@@ -185,7 +186,40 @@ Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le
     ]
 }
 ```
+##### Ejemplo 3: petición ordenando por campos
+[http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort= precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort=precio)
 
+##### Resultado del Ejemplo 3
+```json
+{
+    "success": true,
+    "results": [
+        {
+            "tags": [
+            "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bd",
+            "nombre": "Cubo rubik",
+            "venta": true,
+            "precio": 15,
+            "foto": "cubo_rubik.jpg",
+            "__v": 0
+        },
+        {
+            "tags": [
+            "work",
+            "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bb",
+            "nombre": "Mouse",
+            "venta": false,
+            "precio": 29,
+            "foto": "mouse.png",
+            "__v": 0
+        }
+    ]
+}
+```
 ### [GET] Consultar un Anuncios
 
 #### Definición
