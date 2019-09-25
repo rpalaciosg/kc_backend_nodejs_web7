@@ -54,8 +54,10 @@ Además el json a recibir, nos devolverá una propiedad success, la cual estará
 
 El endpoint **/anuncios** en nuestra API nos permitirá  consultar, paginar, y filtrar datos de todos los anuncios registrados en la base de datos MongoDB de nuestra aplicación `Nodepop`.
 
-** Recursos:** 
-Los recursos son todos los métodos, y filtros aplicados o disponibles para un endpoint en este caso el de `/anuncios`.
+## Recursos 
+Los recursos son todos los métodos, y filtros aplicados o disponibles para un endpoint en este caso el de `/anuncios`:
+- `/anuncios/` - obtener todos los anuncios de nodepop.
+- `/anuncios/:id` - obtener un anuncio específico.
 
 ### [GET] Lista de Anuncios
 
