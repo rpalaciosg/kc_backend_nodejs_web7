@@ -3,7 +3,7 @@
 - Proyecto backend del API de la app Nodepop, creada como practica parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
 - El servicio mantiene anuncios de compra o venta de artículos y permite consultar,  y buscar filtros por varios criterios.
 
-## Requirements
+## Requerimientos
 - **Tecnologías:** Este proyecto usa EXPRESS, MongoDB, mongoose y Node.js. Se puede conocer las dependencias en `package.json`.
 
 ### MongoDB
@@ -45,7 +45,7 @@ Hay varias formas de iniciar o arrancar nodepop:
 ```json
 {
  success: true,
- ...
+ result: []
 }
 ```
 Además el json a recibir, nos devolverá una propiedad success, la cual estará en `true` cuando la respuesta se ha resuelto satisfactoriamente, y `false` cuando hubo algún error en la petición.
@@ -136,16 +136,17 @@ http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit&fields=:campo1 :ca
 ##### Query Params
 - start : **integer** Desde que anuncio se quiere consultar
 - limit : **integer** Cantidad de anuncios a partir del inicio que desea retornar.
-- fields: **string[]** Campos que se quiere seleccionar aparezcan en la consulta.
+- fields : **string[]** Campos que se quiere seleccionar aparezcan en la consulta.
 
 **GET** /apiv1/anuncios
 Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le pase en la URL, en este caso mostrara desde el objetos 2 y el lìmite a mostrar es de 2 objetos.
 
-#### Ejemplo de peticiones
+#### Ejemplos de peticiones
 
+##### Ejemplo 1: petición seleccionando campos y paginado
 [http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio)
 
-#### Resultado del ejemplo
+##### Resultado del Ejemplo 1
 
 ```json
 {
@@ -158,6 +159,26 @@ Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le
         },
         {
             "_id": "5d84855afcc9025b29f6d3b9",
+            "nombre": "iPhone 3GS",
+            "precio": 50
+        }
+    ]
+}
+```
+
+##### Ejemplo 2: petición seleccionando campo y omitiendo id
+[http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio -_id](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio%20-_id)
+
+##### Resultado del Ejemplo 2
+```json
+{
+    "success": true,
+    "results": [
+        {
+            "nombre": "Bicicleta",
+            "precio": 230.15
+        },
+        {
             "nombre": "iPhone 3GS",
             "precio": 50
         }
