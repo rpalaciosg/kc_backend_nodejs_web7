@@ -19,9 +19,10 @@ router.get('/', async (req, res, next) => {
         const sort = req.query.sort;
         const tags = req.query.tags;
         const venta = req.query.venta;
+        //const precio // para el filtro por precio debo hacer un typeof para comparar que no sea 'undefined'
         const filter = {};
 
-        if (tags) {
+        if (tags) { // para este filtro lo debo hacer con un $in
             filter.tags = tags;
         }
 
