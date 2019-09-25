@@ -44,8 +44,8 @@ Hay varias formas de iniciar o arrancar nodepop:
 
 ```json
 {
- success: true,
- result: []
+ "success": true,
+ "result": []
 }
 ```
 Además el json a recibir, nos devolverá una propiedad success, la cual estará en `true` cuando la respuesta se ha resuelto satisfactoriamente, y `false` cuando hubo algún error en la petición.
