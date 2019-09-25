@@ -126,52 +126,40 @@ http://localhost:3000/apiv1/anuncios
 
 Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 
-### [GET] Lista de Anuncios Paginados
+### [GET] Lista de Anuncios Paginados y con filtros
 
 #### Definición
-http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit
+http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit&fields=:campo1 :campo2 :campoN
 
 #### Parametros
 
 ##### Query Params
 - start : **integer** Desde que anuncio se quiere consultar
 - limit : **integer** Cantidad de anuncios a partir del inicio que desea retornar.
+- fields: **string[]** Campos que se quiere seleccionar aparezcan en la consulta.
 
 **GET** /apiv1/anuncios
 Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le pase en la URL, en este caso mostrara desde el objetos 2 y el lìmite a mostrar es de 2 objetos.
 
 #### Ejemplo de peticiones
 
-[http://localhost:3000/apiv1/anuncios?start=2&limit=2](http://localhost:3000/apiv1/anuncios?start=2&limit=2)
+[http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio)
 
 #### Resultado del ejemplo
 
 ```json
 {
     "success": true,
-    "anuncios": [
+    "results": [
         {
-            "tags": [
-                "lifestyle"
-            ],
-            "_id": "5d84855afcc9025b29f6d3bd",
-            "nombre": "Cubo rubik",
-            "venta": true,
-            "precio": 15,
-            "foto": "cubo_rubik.jpg",
-            "__v": 0
+            "_id": "5d84855afcc9025b29f6d3b8",
+            "nombre": "Bicicleta",
+            "precio": 230.15
         },
         {
-            "tags": [
-                "mobile",
-                "lifestyle"
-            ],
-            "_id": "5d84855afcc9025b29f6d3be",
-            "nombre": "Smartwatch",
-            "venta": true,
-            "precio": 40,
-            "foto": "smartwatch.png",
-            "__v": 0
+            "_id": "5d84855afcc9025b29f6d3b9",
+            "nombre": "iPhone 3GS",
+            "precio": 50
         }
     ]
 }
