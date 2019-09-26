@@ -17,6 +17,10 @@ const anuncioSchema = mongoose.Schema({
     tags: [{type: String, enum: TAGS_LIST}]
 });
 
+anuncioSchema.index({ venta: 1});
+anuncioSchema.index({ precio: 1});
+anuncioSchema.index({ tags: 1 });
+
 anuncioSchema.statics.list = function () {
     
 };
