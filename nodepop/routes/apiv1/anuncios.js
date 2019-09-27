@@ -39,8 +39,9 @@ router.get('/', async (req, res, next) => {
 });
 
 /**
- * Get /anuncios/:id
+ * GET /anuncios/:id
  * Obtiene un agente mediante el :id
+ * http://localhost:3000/apiv1/anuncios/:id
  */
 router.get('/:id', async(req, res, next) => {
     try {
@@ -51,6 +52,22 @@ router.get('/:id', async(req, res, next) => {
         }
         res.json({success: true, result: anuncio});
     } catch (error) {
+        next(err);
+    }
+});
+
+/**
+ * POST /anuncios
+ * Crea un anuncio 
+ * http://localhost:3000/apiv1/anuncios
+ */
+router.post('/', async (req, res, next) => {
+    try {
+        const data = req.body;
+        const anuncio = new Anuncio(data);
+        const anuncioGuardado = await anuncio.save();
+        res.json({success: true, result: anuncioGuardado});
+    } catch (err) {
         next(err);
     }
 });
