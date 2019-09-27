@@ -1,10 +1,19 @@
 # Nodepop(API)
 
+## Introduction
 - Proyecto backend del API de la app Nodepop, creada como practica parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
 - El servicio mantiene anuncios de compra o venta de artículos y permite consultar,  y buscar filtros por varios criterios.
+- Además puedes visitar un site con los anuncios en la base de datos de nodepop después de iniciar la app ingresando al url [http://localhost:3000/](http://localhost:3000/).
 
-## Requerimientos
+## Overview
+
 - **Tecnologías:** Este proyecto usa EXPRESS, MongoDB, mongoose y Node.js. Se puede conocer las dependencias en `package.json`.
+
+- El Api de nodepop esta basada en principios REST y usa los métodos HTTP(GET y POST) para acceder a los recursos. 
+
+- El formato de transferencia soportado por el API para enviar y recibir respuestas es en JSON.
+
+- Como alternativa a esta se puede revisar la documentacion en línea [aquí](https://documenter.getpostman.com/view/3162339/SVn3sFCr).
 
 ### MongoDB
 Para este proyecto es necesario tener instalado MongoDB. Primero vamos a arrancar un servidor MongoDB local escribiendo la siguiente lìnea en un terminal:
@@ -13,17 +22,19 @@ Para este proyecto es necesario tener instalado MongoDB. Primero vamos a arranca
 > ./bin/mongod --dbpath ./data/db --directoryperdb
 ```
 
-### Instalar dependencias
+### Instalación de dependencias
 Un paso importante antes de arrancar el servidor es instalar todas las dependencias del proyecto. Para hacerlo, en un terminal ejecutamos lo siguiente:
 
 ```shell
 > npm install
 ```
+
 ### Inicializar Base de Datos
 En este proceso se crearà y cargará una colección de documentos de la base de datos necesaria para el funcionamiento de la aplicación 'nodepop', para esto ejecutamos el script `installDB` dentro del package.json:
 ```shell
 > npm run installDB
 ```
+
 ### Iniciar App
 Hay varias formas de iniciar o arrancar nodepop:
 - En modo DEBUG para el desarrollo, ejecutamos en un terminal:
@@ -37,10 +48,13 @@ Hay varias formas de iniciar o arrancar nodepop:
 
 > Puedes conocer mas revisando el apartado `scripts` en el archivo de configuración *package.json*
 
-# API Methods
+## Autenticación
+Todavía no cuenta con autenticación.
 
-- El Api de nodepop esta basada en principios REST y usa los métodos HTTP(GET y POST) para acceder a los recursos. 
-- El formato de trasnferencia soportado por el API para enviar y recibir respuestas es en JSON.
+## Codigos de Error
+¿Que error y códigos de estado puede esperar un usuario?
+
+El API devuelve un json, el cual cuenta con una propiedad booleana `success`, la cual estará en `true` cuando la respuesta se ha resuelto satisfactoriamente, y `false` cuando hubo algún error en la petición.
 
 ```json
 {
@@ -48,27 +62,34 @@ Hay varias formas de iniciar o arrancar nodepop:
  "result": []
 }
 ```
-Además el json a recibir, nos devolverá una propiedad success, la cual estará en `true` cuando la respuesta se ha resuelto satisfactoriamente, y `false` cuando hubo algún error en la petición.
 
-## Endpoint `/anuncios`
+## Solicitudes límite
+Al estar en desarrollo actualmente no hay límite en la cantidad de solicitudes.
 
-El endpoint **/anuncios** en nuestra API nos permitirá  consultar, paginar, y filtrar datos de todos los anuncios registrados en la base de datos MongoDB de nuestra aplicación `Nodepop`.
+
+
+# API Methods
 
 ## Recursos 
-Los recursos son todos los métodos, y filtros aplicados o disponibles para un endpoint en este caso el de `/anuncios`:
+Los recursos son todos los métodos, y filtros aplicados o disponibles para un endpoint en este caso el endpoint  `/anuncios`:
 - `/anuncios/` - obtener todos los anuncios de nodepop.
 - `/anuncios/:id` - obtener un anuncio específico.
 
-### [GET] Lista de Anuncios
+## Endpoint `/anuncios`
 
-#### Definición
+El endpoint **/anuncios** en nuestra API nos permite consultar, paginar, y filtrar datos de todos los anuncios registrados en la base de datos MongoDB de nuestra aplicación `Nodepop`.
+
+
+## [GET] Lista de Anuncios
+
+### Definición
 `http://localhost:3000/apiv1/anuncios`
 
 
 
 **GET** /apiv1/anuncios
 
-#### Resultado del ejemplo
+### Resultado del ejemplo
 
 ```JSON
 {
@@ -128,29 +149,29 @@ Los recursos son todos los métodos, y filtros aplicados o disponibles para un e
 
 Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 
-### [GET] Lista de Anuncios Paginados y con filtros
+## [GET] Lista de Anuncios Paginados y con filtros
 
-#### Definición
+### Definición
 `http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit&fields=:campo1 :campo2 :campoN&sort=:campo1 :campoN`
 
-#### Parametros
+### Parametros
 
-##### Query Params
-- start : **integer** Desde que anuncio se quiere consultar
-- limit : **integer** Cantidad de anuncios a partir del inicio que desea retornar.
-- fields : **string** Campos que se quiere seleccionar aparezcan en la consulta.
-- sort : **string** Campos por los que se quiere ordenar. Ordena de forma ascendente por defecto.
+#### Query Params
+- **start** : _`integer`_ Desde que anuncio se quiere consultar
+- limit : _`integer`_ Cantidad de anuncios a partir del inicio que desea retornar.
+- **fields** : _`string`_ Campos que se quiere seleccionar aparezcan en la consulta.
+- **sort** : _`string`_ Campos por los que se quiere ordenar. Ordena de forma ascendente por defecto.
   - Descendente: En caso de querer ordenar de forma descendente se agrega el signo menos (-) antes del campo por el que se quiere ordenar como por ejemplo `-precio`.
-- filter : **string** Criterios de búsqueda por campos:
+- **filter** : _`string`_ Criterios de búsqueda por campos:
   - tags = deben estar entre estas opciones [work, lifestyle, motor, mobile]
   - venta = puede ser [true o false]
 
 **GET** /apiv1/anuncios
-Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le pase en la URL, en este caso mostrara desde el objetos 2 y el lìmite a mostrar es de 2 objetos.
+Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, ordenación, selección o búsqueda que se agregue al URL.
 
-#### Ejemplos de peticiones
+### Ejemplos de peticiones
 
-##### Ejemplo 1: petición seleccionando campos y paginado
+#### Ejemplo 1: petición seleccionando campos y paginado
 [http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio)
 
 ##### Resultado del Ejemplo 1
@@ -173,10 +194,10 @@ Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le
 }
 ```
 
-##### Ejemplo 2: petición seleccionando campo y omitiendo id
+#### Ejemplo 2: petición seleccionando campo y omitiendo id
 [http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio -_id](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio%20-_id)
 
-##### Resultado del Ejemplo 2
+#### Resultado del Ejemplo 2
 ```json
 {
     "success": true,
@@ -192,10 +213,10 @@ Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le
     ]
 }
 ```
-##### Ejemplo 3: petición ordenando por campos
+#### Ejemplo 3: petición ordenando por campos
 [http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort= precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort=precio)
 
-##### Resultado del Ejemplo 3
+#### Resultado del Ejemplo 3
 ```json
 {
     "success": true,
@@ -227,10 +248,10 @@ Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le
 }
 ```
 
-##### Ejemplo 4: petición filtro por tipo de anuncio
+#### Ejemplo 4: petición filtro por tipo de anuncio
 [http://localhost:3000/apiv1/anuncios?venta=true](http://localhost:3000/apiv1/anuncios?venta=true)
 
-##### Resultado del Ejemplo 4
+#### Resultado del Ejemplo 4
 ```json
 {
     "success": true,
@@ -275,22 +296,22 @@ Devuelve un listado de anuncios de acuerdo al parámetro start y limit que se le
 }
 ```
 
-### [GET] Consultar un Anuncios
+## [GET] Consultar un Anuncios
 
-#### Definición
+### Definición
 
 http://localhost:3000/apiv1/anuncios/:id
 
-#### Parametros
+### Parametros
 
-##### Path Params
+#### Path Params
 
 - id: **integer** Id del anuncio que desea consultar.
 
-#### Ejemplo de peticiones
+### Ejemplo de peticiones
 [http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba](http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba)
 
-#### Resultado del ejemplo
+### Resultado del ejemplo
 
 ```json
 {
