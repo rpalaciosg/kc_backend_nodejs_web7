@@ -149,7 +149,7 @@ El endpoint **/anuncios** en nuestra API nos permite consultar, paginar, y filtr
 
 Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 
-## [GET] Lista de Anuncios Paginados y con filtros
+## [GET] Lista de Anuncios Paginados, filtros y campos de búsqueda
 
 ### Definición
 `http://localhost:3000/apiv1/anuncios?start=:skip&limit=:limit&fields=:campo1 :campo2 :campoN&sort=:campo1 :campoN`
@@ -161,10 +161,18 @@ Recurso del endpoint /anuncios que retorna una lista de todos anuncios.
 - limit : _`integer`_ Cantidad de anuncios a partir del inicio que desea retornar.
 - **fields** : _`string`_ Campos que se quiere seleccionar aparezcan en la consulta.
 - **sort** : _`string`_ Campos por los que se quiere ordenar. Ordena de forma ascendente por defecto.
-  - Descendente: En caso de querer ordenar de forma descendente se agrega el signo menos (-) antes del campo por el que se quiere ordenar como por ejemplo `-precio`.
+  - Descendente: En caso de querer ordenar de forma descendente se agrega el signo menos (-) antes del campo por el que se quiere ordenar como por ejemplo `precio` .
 - **filter** : _`string`_ Criterios de búsqueda por campos:
   - tags = deben estar entre estas opciones [work, lifestyle, motor, mobile]
   - venta = puede ser [true o false]
+  - precio =  _`numeric`_ Rango de precios, el primer rango (rango inicial) siempre debe ser menor que el segundo rango.
+    - 10-50 : busca precio entre estos valores pasados.
+    - 10- : busca valores que tengan precio > (mayor) a este valor pasado.
+    - -50 : busca valores que tengan precio < (menor) a este valor pasado.
+    - 30 : busca valores que tengan el precio = (igual) a este valor pasado.
+  
+#### Campos de búsqueda
+  - nombre = _`string`_ Busca en el nombre de los anuncios que empiecen con la cadena que se pase en este parámetro de búsqueda.
 
 **GET** /apiv1/anuncios
 Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, ordenación, selección o búsqueda que se agregue al URL.
@@ -293,6 +301,104 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
             "__v": 0
         }
     ]
+}
+```
+#### Ejemplo 5: Petición filtro por tags
+[http://localhost:3000/apiv1/anuncios?tags=mobile motor](http://localhost:3000/apiv1/anuncios?tags=mobile%20motor)
+
+#### Resultado del Ejemplo 5
+```json
+{
+    "success": true,
+    "results": [
+        {
+            "tags": [
+                "lifestyle",
+                "mobile"
+            ],
+            "_id": "5d84855afcc9025b29f6d3b9",
+            "nombre": "iPhone 3GS",
+            "venta": false,
+            "precio": 50,
+            "foto": "iphone.png",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "mobile",
+                "lifestyle" 
+            ],
+            "_id": "5d84855afcc9025b29f6d3be",
+            "nombre": "Smartwatch",
+            "venta": true,
+            "precio": 40,
+            "foto": "smartwatch.png",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "lifestyle",
+                "motor"
+            ],
+            "_id": "5d84855afcc9025b29f6d3b8",
+            "nombre": "Bicicleta",
+            "venta": true,
+            "precio": 230.15,
+            "foto": "bici.jpg",
+            "__v": 0
+        }
+    ]
+}
+```
+En esta petición listamos todos los anuncios cuyo campo tags contengan `mobile` y `motor`.
+
+#### Ejemplo 6: Petición filtro por rango de precio
+[http://localhost:3000/apiv1/anuncios?precio=10-30](http://localhost:3000/apiv1/anuncios?precio=10-30)
+
+#### Resultado del Ejemplo 6
+```json
+{
+    "success": true,
+    "results": [
+        {
+            "tags": [
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bd",
+            "nombre": "Cubo rubik",
+            "venta": true,
+            "precio": 15,
+            "foto": "cubo_rubik.jpg",
+            "__v": 0
+        },
+        {
+            "tags": [
+                "work",
+                "lifestyle"
+            ],
+            "_id": "5d84855afcc9025b29f6d3bb",
+            "nombre": "Mouse",
+            "venta": false,
+            "precio": 29,
+            "foto": "mouse.png",
+            "__v": 0
+        }
+    ]
+}
+```
+
+La petición del ejemplo 6 nos devuelve los anuncios cuyo rango de precio este entre >= a 10 y <= a 30.
+
+
+Hay que tener en cuenta que el valor del rango inicial siempre debe ser menor al rango final, en caso de ser mayor devolvera un error 422.
+
+[http://localhost:3000/apiv1/anuncios?precio=30-10](http://localhost:3000/apiv1/anuncios?precio=30-10)
+
+#### Resultado de Error en Ejemplo 6
+```json
+{
+    "success": false,
+    "error": "El primero parámetro del rango de precio debe ser menor"
 }
 ```
 
