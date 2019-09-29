@@ -76,18 +76,16 @@ Al estar en desarrollo actualmente no hay límite en la cantidad de solicitudes.
 Los recursos son todos los métodos, y filtros aplicados o disponibles para un endpoint en este caso el endpoint  `/anuncios`:
 - `/anuncios/` - obtener todos los anuncios de nodepop.
 - `/anuncios/:id` - obtener un anuncio específico.
+- `/anuncios/tags` - obtener una lista con los tags existentes.
 
 ## Endpoint `/anuncios`
 
 El endpoint **/anuncios** en nuestra API nos permite consultar, paginar, y filtrar datos de todos los anuncios registrados en la base de datos MongoDB de nuestra aplicación `Nodepop`.
 
-
 ## [GET] Lista de Anuncios
 
 ### Definición
 `http://localhost:3000/apiv1/anuncios`
-
-
 
 **GET** /apiv1/anuncios
 
@@ -298,7 +296,7 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
 }
 ```
 
-## [GET] Consultar un Anuncios
+## [GET] Consultar un Anuncio
 
 ### Definición
 
@@ -332,6 +330,29 @@ http://localhost:3000/apiv1/anuncios/:id
     }
 }
 ```
+
+## [GET] Lista de Tags
+
+### Definición
+`http://localhost:3000/apiv1/anuncios/tags`
+
+**GET** /apiv1/anuncios/tags
+
+### Resultado del ejemplo
+
+```json
+{
+    "success": true,
+    "results": [
+        "lifestyle",
+        "mobile",
+        "motor",
+        "work"
+    ]
+}
+```
+Recurso del endpoint /anuncios/tags que retorna una lista con los tags existentes.
+
 
 # Site
 

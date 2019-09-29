@@ -72,7 +72,19 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-
+/**
+ * GET /anuncios/tags
+ * Obtiene el listado de tags existentes
+ * http://localhost:3000/apiv1/anuncios/tags
+ */
+router.get('/tags', async (req, res, next) => {
+    try {
+        const tagList = await anuncioController.listaTags();
+        res.json({ success: true, results: tagList });
+    } catch (err) {
+        next(err);
+    }
+});
 
 /**
  * GET /anuncios/:id
