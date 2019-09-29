@@ -1,5 +1,7 @@
 # Nodepop(API)
 
+![imagen del home de nodepop]('nodepop/public/images/Documentación/home_site.png');
+
 ## Introduction
 - Proyecto backend del API de la app Nodepop, creada como practica parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
 - El servicio mantiene anuncios de compra o venta de artículos y permite consultar,  y buscar filtros por varios criterios.
