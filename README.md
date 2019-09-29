@@ -2,6 +2,26 @@
 
 ![imagen del home de nodepop](nodepop/public/images/Documentación/home_site.png?raw=true "home site nodepop")
 
+## Tabla de contenido
+- [Introduction](#introduccion).
+- [Overview](#overview)
+  - [MongoDB](#MongoDB)
+  - [Instalación de dependencias](#instalacion_dependencias)
+  - [Inicializar Base de Datos](#inicializar_base_datos)
+  - [Iniciar App](#iniciar_app)
+- [Autenticación](#autenticacion)
+- [Codigos de Error](#codigos_error)
+- [Solicitudes límite](#solicitudes_limite)
+- [API Methods](#api_methods)
+  - [Recursos](#recursos)
+  - [Endpoint `/anuncios`](#endpoint_anuncios)
+  - [[GET] Lista de Anuncios](#get_Lista_Anuncios)
+  - [[GET] Lista de Anuncios Paginados, filtros y campos de búsqueda](#get_lista_anuncios_paginados_filtros_campos_búsqueda)
+  - [[GET] Consultar un Anuncio](#get_consultar_anuncio)
+  - [[GET] Listar Tags](#get_listar_tags)
+  - [[POST] Crear un Anuncio](#post_crear_anuncio)
+- [Site](#site)
+
 ## Introduction
 - Proyecto backend del API de la app Nodepop, creada como practica parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
 - El servicio mantiene anuncios de compra o venta de artículos y permite consultar,  y buscar filtros por varios criterios.
@@ -407,6 +427,30 @@ Hay que tener en cuenta que el valor del rango inicial siempre debe ser menor al
     "error": "El primero parámetro del rango de precio debe ser menor"
 }
 ```
+#### Ejemplo 7: Búsqueda por nombre
+*[GET]* [http://localhost:3000/apiv1/anuncios?nombre=bici](http://localhost:3000/apiv1/anuncios?nombre=bici)
+
+#### Resultado del Ejemplo 7
+```json
+{
+    "success": true,
+    "results": [
+        {
+            "tags": [
+                "lifestyle",
+                "motor"
+            ],
+            "_id": "5d84855afcc9025b29f6d3b8",
+            "nombre": "Bicicleta",
+            "venta": true,
+            "precio": 230.15,
+            "foto": "bici.jpg",
+            "__v": 0
+        }
+    ]
+}
+```
+Esta petición nos permite hacer una búsqueda por el campo nombre.
 
 ## [GET] Consultar un Anuncio
 

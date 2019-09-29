@@ -19,7 +19,10 @@ router.get('/', async (req, res, next) => {
         const sort = req.query.sort;
         const tags = req.query.tags || "";
         const venta = req.query.venta;
+        const nombre = req.query.nombre;
         const precio = req.query.precio || "";        
+
+        // Patrones de cadena para query param precio
         let patPreIgual = /\d/;
         let patPreMenor = /-\d/;
         let patPreEntre = /\d-\d/;
@@ -57,6 +60,10 @@ router.get('/', async (req, res, next) => {
                 filter.precio = parseInt(extPrecio[0]);
                 console.log("arma precio a igual-->", filter.precio);
             }
+        }
+
+        if (nombre) {
+            filter.nombre = {$regex: new RegExp('^' + nombre + '.*', 'i')};
         }
 
         const anuncios = await anuncioController.listaAnuncios({filter:filter, skip, limit, fields, sort});
