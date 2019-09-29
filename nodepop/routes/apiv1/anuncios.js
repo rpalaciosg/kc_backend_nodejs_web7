@@ -19,10 +19,10 @@ router.get('/', async (req, res, next) => {
         const sort = req.query.sort;
         const tags = req.query.tags || "";
         const venta = req.query.venta;
-        const precio = req.query.precio;
+        const precio = req.query.precio || "";        
+        const extPrecio = precio.split("-");        
         const extTags = tags.split(" ");
-        const extPrecio = precio.split("-");
-        console.log("extraigo precio---->",extPrecio);
+        console.log("extrae tags--->", extTags)
         let patPreIgual = /\d/;
         let patPreMenor = /-\d/;
         let patPreEntre = /\d-\d/;
@@ -32,13 +32,10 @@ router.get('/', async (req, res, next) => {
         
         // para este filtro por tags lo debo hacer con un $in
         // const cursor = db.collection('anuncios').find({ tags: { $in: ['work','stylelife']}});
-        if (tags !== "") { 
-            if (extTags.length > 1) { 
-
-            } else {
-                filter.tags = tags;
-            }
-            
+        if (tags !== "") {             
+            // filter.tags = tags;           
+            filter.tags = {  '$in': extTags };
+            console.log("filtro de tags-->", filter.tags);
         }
 
         if (venta) {
