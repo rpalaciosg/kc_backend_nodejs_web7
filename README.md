@@ -85,7 +85,7 @@ El endpoint **/anuncios** en nuestra API nos permite consultar, paginar, y filtr
 ## [GET] Lista de Anuncios
 
 ### Definición
-`http://localhost:3000/apiv1/anuncios`
+*[GET]* [http://localhost:3000/apiv1/anuncios](http://localhost:3000/apiv1/anuncios)
 
 **GET** /apiv1/anuncios
 
@@ -179,8 +179,8 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
 
 ### Ejemplos de peticiones
 
-#### Ejemplo 1: petición seleccionando campos y paginado
-[http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio)
+#### Ejemplo 1: Seleccionar campos específicos
+*[GET]* [http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio)
 
 ##### Resultado del Ejemplo 1
 
@@ -202,8 +202,10 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
 }
 ```
 
-#### Ejemplo 2: petición seleccionando campo y omitiendo id
-[http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio -_id](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio%20-_id)
+Esta petición devuelve anuncios con paginacion de 0 a 2 y seleccionando solo los campos `nombre` y `precio`
+
+#### Ejemplo 2: Omitir campo id
+*[GET]* [http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio -_id](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio%20-_id)
 
 #### Resultado del Ejemplo 2
 ```json
@@ -221,8 +223,10 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
     ]
 }
 ```
-#### Ejemplo 3: petición ordenando por campos
-[http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort= precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort=precio)
+Esta petición nos devuelve los eventos sin mostrar el campo _id.
+
+#### Ejemplo 3: Ordenar por campos
+*[GET]* [http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort= precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort=precio)
 
 #### Resultado del Ejemplo 3
 ```json
@@ -255,9 +259,9 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
     ]
 }
 ```
-
+Esta petición me devolverá eventos ordenando según el campo que le pase al parámetro `sort`.
 #### Ejemplo 4: petición filtro por tipo de anuncio
-[http://localhost:3000/apiv1/anuncios?venta=true](http://localhost:3000/apiv1/anuncios?venta=true)
+*[GET]* [http://localhost:3000/apiv1/anuncios?venta=true](http://localhost:3000/apiv1/anuncios?venta=true)
 
 #### Resultado del Ejemplo 4
 ```json
@@ -303,8 +307,10 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
     ]
 }
 ```
-#### Ejemplo 5: Petición filtro por tags
-[http://localhost:3000/apiv1/anuncios?tags=mobile motor](http://localhost:3000/apiv1/anuncios?tags=mobile%20motor)
+Esta petición nos permite filtrar anuncios según el tipo, en venta si el parametros es true y compra si el parámetro es false.
+
+#### Ejemplo 5: Filtro por tags
+*[GET]* [http://localhost:3000/apiv1/anuncios?tags=mobile motor](http://localhost:3000/apiv1/anuncios?tags=mobile%20motor)
 
 #### Resultado del Ejemplo 5
 ```json
@@ -352,8 +358,8 @@ Devuelve un listado de anuncios de acuerdo a los parámetros ya sea de filtro, o
 ```
 En esta petición listamos todos los anuncios cuyo campo tags contengan `mobile` y `motor`.
 
-#### Ejemplo 6: Petición filtro por rango de precio
-[http://localhost:3000/apiv1/anuncios?precio=10-30](http://localhost:3000/apiv1/anuncios?precio=10-30)
+#### Ejemplo 6: Filtro por rango de precio
+*[GET]* [http://localhost:3000/apiv1/anuncios?precio=10-30](http://localhost:3000/apiv1/anuncios?precio=10-30)
 
 #### Resultado del Ejemplo 6
 ```json
@@ -392,7 +398,7 @@ La petición del ejemplo 6 nos devuelve los anuncios cuyo rango de precio este e
 
 Hay que tener en cuenta que el valor del rango inicial siempre debe ser menor al rango final, en caso de ser mayor devolvera un error 422.
 
-[http://localhost:3000/apiv1/anuncios?precio=30-10](http://localhost:3000/apiv1/anuncios?precio=30-10)
+*[GET]* [http://localhost:3000/apiv1/anuncios?precio=30-10](http://localhost:3000/apiv1/anuncios?precio=30-10)
 
 #### Resultado de Error en Ejemplo 6
 ```json
@@ -406,7 +412,7 @@ Hay que tener en cuenta que el valor del rango inicial siempre debe ser menor al
 
 ### Definición
 
-http://localhost:3000/apiv1/anuncios/:id
+*[GET]* `http://localhost:3000/apiv1/anuncios/:id`
 
 ### Parametros
 
@@ -415,7 +421,7 @@ http://localhost:3000/apiv1/anuncios/:id
 - id: **integer** Id del anuncio que desea consultar.
 
 ### Ejemplo de peticiones
-[http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba](http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba)
+*[GET]* [http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba](http://localhost:3000/apiv1/anuncios/5d84855afcc9025b29f6d3ba)
 
 ### Resultado del ejemplo
 
@@ -436,13 +442,14 @@ http://localhost:3000/apiv1/anuncios/:id
     }
 }
 ```
+Esta petición nos permite buscar un anuncio por su id.
 
-## [GET] Lista de Tags
+## [GET] Listar Tags
 
 ### Definición
-`http://localhost:3000/apiv1/anuncios/tags`
-
 **GET** /apiv1/anuncios/tags
+
+*[GET]* http://localhost:3000/apiv1/anuncios/tags
 
 ### Resultado del ejemplo
 
@@ -459,6 +466,57 @@ http://localhost:3000/apiv1/anuncios/:id
 ```
 Recurso del endpoint /anuncios/tags que retorna una lista con los tags existentes.
 
+## [POST] Crear un Anuncio
+
+### Definición
+**POST** /apiv1/anuncios/
+
+### Parametros
+
+#### Body Params
+- **nombre** : _`string`_ Nombre del artículo.
+- **venta** : _`booleam`_ Si está en true el artículo se `vende` si está en `flase` se busca.
+- **precio** : _`numeric`_ Es el precio del artículo.
+- **foto** : _`string`_ Es el nombre uo URL del archivo de la foto del artículo.
+- **tags** : _`list`_ Es una lista de los tags de un artículo, el cual puede tener las siguientes:  [work, lifestyle, motor, mobile]
+
+
+### Ejemplo
+
+*[POST]* http://localhost:3000/apiv1/anuncios
+
+**Headers**
+Content-Type:	`application/x-www-form-urlencoded`
+**Body**
+    nombre: Monitor,
+    venta: false,
+    precio: 200,
+    foto:'',
+    tags: work,
+    tags: lifestyle
+
+
+### Resultado del ejemplo
+
+```json
+status: 200
+
+{
+    "success": true,
+    "result": {
+        "tags": [
+            "work",
+            "lifestyle"
+        ],
+        "_id": "5d90a457c4d2501fec3af158",
+        "nombre": "Monitor",
+        "venta": false,
+        "precio": 200,
+        "foto": "",
+        "__v": 0
+    }
+}
+```
 
 # Site
 
