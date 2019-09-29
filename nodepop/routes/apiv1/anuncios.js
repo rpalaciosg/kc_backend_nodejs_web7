@@ -20,9 +20,6 @@ router.get('/', async (req, res, next) => {
         const tags = req.query.tags || "";
         const venta = req.query.venta;
         const precio = req.query.precio || "";        
-        const extPrecio = precio.split("-");        
-        const extTags = tags.split(" ");
-        console.log("extrae tags--->", extTags)
         let patPreIgual = /\d/;
         let patPreMenor = /-\d/;
         let patPreEntre = /\d-\d/;
@@ -32,10 +29,9 @@ router.get('/', async (req, res, next) => {
         
         // para este filtro por tags lo debo hacer con un $in
         // const cursor = db.collection('anuncios').find({ tags: { $in: ['work','stylelife']}});
-        if (tags !== "") {             
-            // filter.tags = tags;           
-            filter.tags = {  '$in': extTags };
-            console.log("filtro de tags-->", filter.tags);
+        if (tags !== "") {                    
+            const extTags = tags.split(" ");     
+            filter.tags = {  '$in': extTags };            
         }
 
         if (venta) {
@@ -43,22 +39,23 @@ router.get('/', async (req, res, next) => {
         }
 
         //const precio // para el filtro por precio debo hacer un typeof para comparar que no sea 'undefined'
-        if (typeof precio !== 'undefined') {
-            if (patPreIgual.test(precio)) {
-                filter.precio = extPrecio[0];
-            }
-            
-            if (patPreMenor.test(precio)) {
-                console.log("arma query menor---->", { '$lte': parseInt(extPrecio[1]) });
-                filter.precio = { '$lte': parseInt(extPrecio[1]) };
-                
-            }
-             if (patPreEntre.test(precio)) {
-                filter.precio = { '$gte': extPrecio[0], '$lte': extPrecio[1] };
-            } 
-            
-            if (patPreMayor.test(precio)) {
+        if (precio !== "") {
+            const extPrecio = precio.split("-");        
+            if (patPreEntre.test(precio)) {
+                if (parseInt(extPrecio[0]) >= parseInt(extPrecio[1])){                        
+                    res.status(422).json({success: false, error:"El primero parámetro del rango de precio debe ser menor"});                                            
+                    return;
+                }
+                filter.precio = { '$gte': extPrecio[0], '$lte': extPrecio[1] };                
+            } else if (patPreMayor.test(precio)) {
                 filter.precio = { '$gte': extPrecio[0] };
+                console.log("arma precio mayor -->", filter.precio);
+            } else if (patPreMenor.test(precio)) {                
+                filter.precio = { '$lte': parseInt(extPrecio[1]) };
+                console.log("arma precio menor -->", filter.precio);
+            } else if (patPreIgual.test(precio)) {
+                filter.precio = parseInt(extPrecio[0]);
+                console.log("arma precio a igual-->", filter.precio);
             }
         }
 
