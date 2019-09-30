@@ -125,12 +125,12 @@ Todavía no cuenta con autenticación.
 ## Codigos de Error
 ¿Que error y códigos de estado puede esperar un usuario?
 
-El API devuelve un json, el cual cuenta con una propiedad booleana `success`, la cual estará en `true` cuando la respuesta se ha resuelto satisfactoriamente, y `false` cuando hubo algún error en la petición.
+El API devuelve un json, el cual cuenta con una propiedad booleana `success`, la cual estará en `true` cuando la respuesta se ha resuelto satisfactoriamente, pero en caso de error el campo `success` estará en `false` se pasará un campo `error` con el mensaje de el error.
 
 ```json
 {
- "success": true,
- "result": []
+ "success": false,
+ "error": "Mensaje del error"
 }
 ```
 
