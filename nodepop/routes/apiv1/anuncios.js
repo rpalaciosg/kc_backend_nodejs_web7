@@ -121,4 +121,21 @@ router.post('/', async (req, res, next) => {
     }
 });
 
+/**
+ * PUT /anuncios/:id
+ * Actualiza un anuncio
+ * http://localhost:3000/apiv1/anuncios/:id
+ */
+router.put('/:id', async(req, res, next) => {
+    try {
+        const _id = req.params.id;
+        const data = req.body;
+
+        const anuncioActualizado = await Anuncio.findByIdAndUpdate({_id:_id}, data, {new: true}).exec();
+        res.json({success: true, result: anuncioActualizado});
+    } catch (err) {
+        next(err);
+    }
+});
+
 module.exports = router;

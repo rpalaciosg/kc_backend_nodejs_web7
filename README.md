@@ -58,6 +58,12 @@
       - [Body Params](#body-params)
     - [Ejemplo](#ejemplo)
     - [Resultado del ejemplo](#resultado-del-ejemplo-3)
+  - [[PUT] Actualizar un Anuncio](#put-actualizar-un-anuncio)
+    - [Definición](#definición-5)
+    - [Parametros](#parametros-3)
+      - [Body Params](#body-params-1)
+    - [Ejemplo](#ejemplo-1)
+    - [Resultado del ejemplo](#resultado-del-ejemplo-4)
 - [WebSite NodePop](#website-nodepop)
   - [Ejemplo 1 - Filtro por tags](#ejemplo-1---filtro-por-tags)
   - [Ejemplo 2 - Filtro por tipo de anuncio](#ejemplo-2---filtro-por-tipo-de-anuncio)
@@ -600,6 +606,54 @@ status: 200
         "nombre": "Monitor",
         "venta": false,
         "precio": 200,
+        "foto": "",
+        "__v": 0
+    }
+}
+```
+
+## [PUT] Actualizar un Anuncio
+
+### Definición
+**PUT** /apiv1/anuncios/:id
+
+### Parametros
+
+#### Body Params
+- **nombre** : _`string`_ Nombre del artículo.
+- **venta** : _`booleam`_ Si está en true el artículo se `vende` si está en `flase` se busca.
+- **precio** : _`numeric`_ Es el precio del artículo.
+- **foto** : _`string`_ Es el nombre uo URL del archivo de la foto del artículo.
+- **tags** : _`list`_ Es una lista de los tags de un artículo, el cual puede tener las siguientes:  [work, lifestyle, motor, mobile]
+
+### Ejemplo
+
+*[PUT]* http://localhost:3000/apiv1/anuncios/5d90a457c4d2501fec3af158
+
+**Headers**
+Content-Type:	`application/x-www-form-urlencoded`
+**Body**
+    nombre: Monitor LG,
+    venta: false,
+    precio: 300,
+    foto:'',
+    tags: work
+
+### Resultado del ejemplo
+
+```json
+status: 200
+
+{
+    "success": true,
+    "result": {
+        "tags": [
+            "work"
+        ],
+        "_id": "5d90a457c4d2501fec3af158",
+        "nombre": "Monitor LG",
+        "venta": false,
+        "precio": 300,
         "foto": "",
         "__v": 0
     }
