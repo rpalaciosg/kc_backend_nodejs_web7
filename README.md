@@ -1,26 +1,69 @@
-# Nodepop(API)
+# NodePop
 
 ![imagen del home de nodepop](nodepop/public/images/Documentación/home_site.png?raw=true "home site nodepop")
 
-## Tabla de contenido
-- [Introduction](#introduccion).
-- [Overview](#overview)
-  - [MongoDB](#MongoDB)
-  - [Instalación de dependencias](#instalacion_dependencias)
-  - [Inicializar Base de Datos](#inicializar_base_datos)
-  - [Iniciar App](#iniciar_app)
-- [Autenticación](#autenticacion)
-- [Codigos de Error](#codigos_error)
-- [Solicitudes límite](#solicitudes_limite)
-- [API Methods](#api_methods)
+
+<!-- code_chunk_output -->
+## Tabla de conenidos
+- [NodePop](#nodepop)
+  - [Tabla de conenidos](#tabla-de-conenidos)
+  - [Introduction](#introduction)
+  - [Overview](#overview)
+    - [MongoDB](#mongodb)
+    - [Instalación de dependencias](#instalación-de-dependencias)
+    - [Inicializar Base de Datos](#inicializar-base-de-datos)
+    - [Iniciar App](#iniciar-app)
+  - [Autenticación](#autenticación)
+  - [Codigos de Error](#codigos-de-error)
+  - [Solicitudes límite](#solicitudes-límite)
+- [API Methods (NodePop)](#api-methods-nodepop)
   - [Recursos](#recursos)
-  - [Endpoint `/anuncios`](#endpoint_anuncios)
-  - [[GET] Lista de Anuncios](#get_Lista_Anuncios)
-  - [[GET] Lista de Anuncios Paginados, filtros y campos de búsqueda](#get_lista_anuncios_paginados_filtros_campos_búsqueda)
-  - [[GET] Consultar un Anuncio](#get_consultar_anuncio)
-  - [[GET] Listar Tags](#get_listar_tags)
-  - [[POST] Crear un Anuncio](#post_crear_anuncio)
-- [Site](#site)
+  - [Endpoint `/anuncios`](#endpoint-anuncios)
+  - [[GET] Lista de Anuncios](#get-lista-de-anuncios)
+    - [Definición](#definición)
+    - [Resultado del ejemplo](#resultado-del-ejemplo)
+  - [[GET] Lista de Anuncios Paginados, filtros y campos de búsqueda](#get-lista-de-anuncios-paginados-filtros-y-campos-de-búsqueda)
+    - [Definición](#definición-1)
+    - [Parametros](#parametros)
+      - [Query Params](#query-params)
+      - [Campos de búsqueda](#campos-de-búsqueda)
+    - [Ejemplos de peticiones](#ejemplos-de-peticiones)
+      - [Ejemplo 1: Seleccionar campos específicos](#ejemplo-1-seleccionar-campos-específicos)
+        - [Resultado del Ejemplo 1](#resultado-del-ejemplo-1)
+      - [Ejemplo 2: Omitir campo id](#ejemplo-2-omitir-campo-id)
+        - [Resultado del Ejemplo 2](#resultado-del-ejemplo-2)
+      - [Ejemplo 3: Ordenar por campos](#ejemplo-3-ordenar-por-campos)
+        - [Resultado del Ejemplo 3](#resultado-del-ejemplo-3)
+      - [Ejemplo 4: petición filtro por tipo de anuncio](#ejemplo-4-petición-filtro-por-tipo-de-anuncio)
+        - [Resultado del Ejemplo 4](#resultado-del-ejemplo-4)
+      - [Ejemplo 5: Filtro por tags](#ejemplo-5-filtro-por-tags)
+        - [Resultado del Ejemplo 5](#resultado-del-ejemplo-5)
+      - [Ejemplo 6: Filtro por rango de precio](#ejemplo-6-filtro-por-rango-de-precio)
+        - [Resultado del Ejemplo 6](#resultado-del-ejemplo-6)
+        - [Resultado de Error en Ejemplo 6](#resultado-de-error-en-ejemplo-6)
+      - [Ejemplo 7: Búsqueda por nombre](#ejemplo-7-búsqueda-por-nombre)
+        - [Resultado del Ejemplo 7](#resultado-del-ejemplo-7)
+  - [[GET] Consultar un Anuncio](#get-consultar-un-anuncio)
+    - [Definición](#definición-2)
+    - [Parametros](#parametros-1)
+      - [Path Params](#path-params)
+    - [Ejemplo de peticiones](#ejemplo-de-peticiones)
+    - [Resultado del ejemplo](#resultado-del-ejemplo-1)
+  - [[GET] Listar Tags](#get-listar-tags)
+    - [Definición](#definición-3)
+    - [Resultado del ejemplo](#resultado-del-ejemplo-2)
+  - [[POST] Crear un Anuncio](#post-crear-un-anuncio)
+    - [Definición](#definición-4)
+    - [Parametros](#parametros-2)
+      - [Body Params](#body-params)
+    - [Ejemplo](#ejemplo)
+    - [Resultado del ejemplo](#resultado-del-ejemplo-3)
+- [WebSite NodePop](#website-nodepop)
+  - [Ejemplo 1 - Filtro por tags](#ejemplo-1---filtro-por-tags)
+  - [Ejemplo 2 - Filtro por tipo de anuncio](#ejemplo-2---filtro-por-tipo-de-anuncio)
+
+<!-- /code_chunk_output -->
+
 
 ## Introduction
 - Proyecto backend del API de la app Nodepop, creada como practica parte del curso de Desarrollo Backend con Node.js del Bootcamp Web 7 de Keepcoding.
@@ -90,7 +133,7 @@ Al estar en desarrollo actualmente no hay límite en la cantidad de solicitudes.
 
 
 
-# API Methods
+# API Methods (NodePop)
 
 ## Recursos 
 Los recursos son todos los métodos, y filtros aplicados o disponibles para un endpoint en este caso el endpoint  `/anuncios`:
@@ -227,7 +270,7 @@ Esta petición devuelve anuncios con paginacion de 0 a 2 y seleccionando solo lo
 #### Ejemplo 2: Omitir campo id
 *[GET]* [http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre precio -_id](http://localhost:3000/apiv1/anuncios?start=0&limit=2&fields=nombre%20precio%20-_id)
 
-#### Resultado del Ejemplo 2
+##### Resultado del Ejemplo 2
 ```json
 {
     "success": true,
@@ -248,7 +291,7 @@ Esta petición nos devuelve los eventos sin mostrar el campo _id.
 #### Ejemplo 3: Ordenar por campos
 *[GET]* [http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort= precio](http://localhost:3000/apiv1/anuncios?start=0&limit=2&sort=precio)
 
-#### Resultado del Ejemplo 3
+##### Resultado del Ejemplo 3
 ```json
 {
     "success": true,
@@ -280,10 +323,11 @@ Esta petición nos devuelve los eventos sin mostrar el campo _id.
 }
 ```
 Esta petición me devolverá eventos ordenando según el campo que le pase al parámetro `sort`.
+
 #### Ejemplo 4: petición filtro por tipo de anuncio
 *[GET]* [http://localhost:3000/apiv1/anuncios?venta=true](http://localhost:3000/apiv1/anuncios?venta=true)
 
-#### Resultado del Ejemplo 4
+##### Resultado del Ejemplo 4
 ```json
 {
     "success": true,
@@ -332,7 +376,7 @@ Esta petición nos permite filtrar anuncios según el tipo, en venta si el param
 #### Ejemplo 5: Filtro por tags
 *[GET]* [http://localhost:3000/apiv1/anuncios?tags=mobile motor](http://localhost:3000/apiv1/anuncios?tags=mobile%20motor)
 
-#### Resultado del Ejemplo 5
+##### Resultado del Ejemplo 5
 ```json
 {
     "success": true,
@@ -381,7 +425,7 @@ En esta petición listamos todos los anuncios cuyo campo tags contengan `mobile`
 #### Ejemplo 6: Filtro por rango de precio
 *[GET]* [http://localhost:3000/apiv1/anuncios?precio=10-30](http://localhost:3000/apiv1/anuncios?precio=10-30)
 
-#### Resultado del Ejemplo 6
+##### Resultado del Ejemplo 6
 ```json
 {
     "success": true,
@@ -420,7 +464,7 @@ Hay que tener en cuenta que el valor del rango inicial siempre debe ser menor al
 
 *[GET]* [http://localhost:3000/apiv1/anuncios?precio=30-10](http://localhost:3000/apiv1/anuncios?precio=30-10)
 
-#### Resultado de Error en Ejemplo 6
+##### Resultado de Error en Ejemplo 6
 ```json
 {
     "success": false,
@@ -430,7 +474,7 @@ Hay que tener en cuenta que el valor del rango inicial siempre debe ser menor al
 #### Ejemplo 7: Búsqueda por nombre
 *[GET]* [http://localhost:3000/apiv1/anuncios?nombre=bici](http://localhost:3000/apiv1/anuncios?nombre=bici)
 
-#### Resultado del Ejemplo 7
+##### Resultado del Ejemplo 7
 ```json
 {
     "success": true,
@@ -562,7 +606,7 @@ status: 200
 }
 ```
 
-# Site
+# WebSite NodePop
 
 Podemos ver el site en el [home](http://localhost:3000/). Aqui se listaran todos los anuncios registrados en la base de datos de la app NodePop.
 
